@@ -1,0 +1,5 @@
+if SHIELD_MILK2
+config ZMK_KEYBOARD_NAME
+    string
+    default "Milk2 Wireless"
+endif

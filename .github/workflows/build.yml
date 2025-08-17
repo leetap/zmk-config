@@ -1,0 +1,22 @@
+name: Build ZMK (milk2)
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build (nice_nano_v2 + milk2)
+        uses: zmkfirmware/zmk-build@v1
+        with:
+          board: nice_nano_v2
+          shield: milk2
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware
+          path: build/**/zephyr/zmk.uf2

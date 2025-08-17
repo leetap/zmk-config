@@ -1,0 +1,2 @@
+config SHIELD_MILK2
+    bool "milk2 (2-key handwired)"

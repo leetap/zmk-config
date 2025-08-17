@@ -1,0 +1,20 @@
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+    };
+};
+
+/* 1x2 handwired matrix: diode-direction col2row
+ * Row 0 = P0.06 (striped ends of both diodes tied here)
+ * Col 0 = P0.07 (free leg of switch 1)
+ * Col 1 = P0.08 (free leg of switch 2)
+ */
+kscan0: kscan {
+    compatible = "zmk,kscan-gpio-matrix";
+    label = "KSCAN";
+    diode-direction = "col2row";
+
+    row-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+    col-gpios = <&gpio0 7 GPIO_ACTIVE_LOW>,
+                <&gpio0 8 GPIO_ACTIVE_LOW>;
+};

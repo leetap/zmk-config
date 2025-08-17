@@ -8,15 +8,30 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    # Use ZMK's official build image
+    container:
+      image: ghcr.io/zmkfirmware/zmk-build:stable
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout zmk-config
+        uses: actions/checkout@v4
+
+      - name: West init/update
+        run: |
+          west init -l config
+          west update
+          west zephyr-export
+
       - name: Build (nice_nano_v2 + milk2)
-        uses: zmkfirmware/zmk@main
-        with:
-          board: nice_nano_v2
-          shield: milk2
-      - name: Upload artifacts
+        run: |
+          west build -s zmk/app -b nice_nano_v2 -- -DSHIELD=milk2
+
+      - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: firmware
-          path: build/**/zephyr/zmk.uf2
+          path: |
+            build/zephyr/zmk.uf2
+            build/zephyr/*.uf2
+            build/zephyr/*.hex

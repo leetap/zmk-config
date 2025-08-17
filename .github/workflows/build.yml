@@ -8,8 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    # Use ZMK's official build image
     container:
       image: ghcr.io/zmkfirmware/zmk-build:stable
 

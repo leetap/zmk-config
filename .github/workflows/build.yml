@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/zmkfirmware/zmk-build:stable
+      image: ghcr.io/zmkfirmware/zmk-build:latest
 
     steps:
       - name: Checkout zmk-config
